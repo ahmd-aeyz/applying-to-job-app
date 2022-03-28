@@ -3,28 +3,28 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mega_trust_project/core/assets/icons.dart';
 import 'package:mega_trust_project/features/Auth/login/presentation/widgets/widgets.dart';
 import 'package:mega_trust_project/features/Auth/register/presentation/bloc/register_cubit.dart';
+import 'package:mega_trust_project/features/Auth/register/presentation/screens/register.dart';
 import 'package:mega_trust_project/features/list_of_jobs/presentation/screens/job_screen.dart';
 import 'package:mega_trust_project/locator.dart';
-
 import '../../../../../core/assets/icons.dart';
-import '../../../login/presentation/screens/LoginScreen.dart';
-import '../bloc/register_states.dart';
+import '../bloc/login_cubit.dart';
+import '../bloc/login_states.dart';
 
-class RegisterScreen extends StatelessWidget {
+
+
+class LoginScreen extends StatelessWidget {
   var emailController = TextEditingController();
-  var nameController = TextEditingController();
-  var passwordConfirmationController = TextEditingController();
   var passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
-  RegisterScreen({Key? key}) : super(key: key);
+  LoginScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (BuildContext context) => getIt<RegisterCubit>(),
+        create: (BuildContext context) => getIt<LoginCubit>(),
         child: Builder(builder: (BuildContext context) {
-          return BlocListener<RegisterCubit, RegisterState>(
+          return BlocListener<LoginCubit, LoginState>(
             listener: (BuildContext context, state) {
               state.map(
                   initial: (initial) {},
@@ -35,7 +35,7 @@ class RegisterScreen extends StatelessWidget {
                   },
                   error: (error) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('error  in Registeration')));
+                        SnackBar(content: Text('error  in Login')));
                   });
             },
             child: Scaffold(
@@ -53,7 +53,7 @@ class RegisterScreen extends StatelessWidget {
                       child: Column(
                         children: [
                           const Text(
-                            'Register',
+                            'Login',
                             style: TextStyle(
                               fontSize: 25,
                               fontWeight: FontWeight.bold,
@@ -63,18 +63,7 @@ class RegisterScreen extends StatelessWidget {
                           const SizedBox(
                             height: 25,
                           ),
-                          defaultFormField(
-                            controller: nameController,
-                            keyboardType: TextInputType.text,
-                            validate: (String? value) {
-                              if (value!.isEmpty) {
-                                return 'Name can not be empty';
-                              }
-                              return null;
-                            },
-                            label: 'Full Name',
-                            prefixIcon: Icons.account_circle_outlined,
-                          ),
+
                           const SizedBox(
                             height: 25,
                           ),
@@ -103,40 +92,27 @@ class RegisterScreen extends StatelessWidget {
                               },
                               prefixIcon: lockPassword,
                               label: 'Password'),
-                          defaultFormField(
-                              controller: passwordConfirmationController,
-                              keyboardType: TextInputType.text,
-                              validate: (String? value) {
-                                if (value!.isEmpty) {
-                                  return 'Password can not be empty';
-                                }
-                                return null;
-                              },
-                              prefixIcon: lockPassword,
-                              label: 'ConfirmationPassword'),
+
                           const SizedBox(
                             height: 25,
                           ),
                           customButton(
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {
-                                  BlocProvider.of<RegisterCubit>(context)
-                                      .register(
-                                          name: nameController.text.trim(),
+                                  BlocProvider.of<LoginCubit>(context)
+                                      .login(
+
                                           password: passwordController.text,
-                                          confirmPassword:
-                                              passwordConfirmationController
-                                                  .text,
                                           email: emailController.text.trim());
                                 }
                               },
-                              text: "REGISTER"),
+                              text: "LOGIN"),
                           SizedBox(
                             height: 15,
                           ),
-                          TextButton(onPressed: ()=>Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginScreen())),
-                              child: Text('Already have an account? Login')),
-                          BlocBuilder<RegisterCubit, RegisterState>(
+                          TextButton(onPressed: ()=>Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>RegisterScreen())),
+                              child: Text('Register Here')),
+                          BlocBuilder<LoginCubit, LoginState>(
                               builder: (BuildContext context, state) {
                             return state.maybeMap(
                               loading: (_)=> const CircularProgressIndicator(),

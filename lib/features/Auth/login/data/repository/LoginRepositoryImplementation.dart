@@ -1,30 +1,35 @@
 
 
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
+import 'package:mega_trust_project/core/const/constant.dart';
 import 'package:mega_trust_project/core/error/failures.dart';
 import 'package:mega_trust_project/features/Auth/login/data/data_source/api_service.dart';
-import 'package:mega_trust_project/features/Auth/login/data/model/login_response.dart';
-import 'package:mega_trust_project/features/Auth/login/domain/entities/login.dart';
+import 'package:mega_trust_project/features/Auth/login/data/model/login_model.dart';
+import 'package:mega_trust_project/features/Auth/login/data/model/login_response_model.dart';
+import 'package:mega_trust_project/features/Auth/login/data/model/user_model.dart';
+import 'package:mega_trust_project/features/Auth/login/domain/entities/login_user_entity.dart';
 import 'package:mega_trust_project/features/Auth/login/domain/repository/LoginDataRepository.dart';
+import 'package:mega_trust_project/features/Auth/register/domain/entities/user_entity.dart';
+
+import '../../../register/data/model/register_model.dart';
 
 class LoginDataRepositoryImpl implements LoginDataRepository{
-  
+
+  final ApiService apiService = ApiService(Dio() , baseUrl );
   @override
-  late final ApiService response;
-  Future<Either<Failure, LoginData>> getLogin(String email, String password) async{
-   return Right( await response.login({
-     "email":email,
-     "password":password
-   }) );
+  Future<Either<Failure, UserEntities>> login({required String email, required String password}) async {
+    final LoginModel loginModel = LoginModel(email: email, password: password);
+    try{
+      final LoginResponseModel response= (await apiService.login(loginModel));
+      print ('response fom repo $response');
+       return Right(response.user);
+
+    } catch(e){
+      print ( 'exception from login $e');
+      return left(ServerFailure(e.toString()));
+    }
+
   }
 
-  @override
-  // TODO: implement props
-  List<Object?> get props => throw UnimplementedError();
-
-  @override
-  // TODO: implement stringify
-  bool? get stringify => throw UnimplementedError();
-  
-  
 }
