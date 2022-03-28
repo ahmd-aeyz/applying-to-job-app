@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mega_trust_project/features/Auth/register/presentation/screens/register.dart';
 import 'package:mega_trust_project/locator.dart';
 
+import 'features/Auth/login/presentation/screens/LoginScreen.dart';
+
 void main() async {
   await initLocator();
   runApp( const MyApp());
@@ -19,7 +21,7 @@ class MyApp extends StatelessWidget {
 
         primarySwatch: Colors.deepOrange,
       ),
-      home: RegisterScreen(),
+      home: LoginScreen(),
     );
   }
 }

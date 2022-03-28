@@ -26,7 +26,7 @@ class RegisterDataRepositoryImpl implements RegisterDataRepository{
       return(  Right(result));
     } catch (e) {
       print('error $e');
-      return left(CacheFailure(e.toString()));
+      return left(ServerFailure(e.toString()));
     }
 
 

@@ -10,7 +10,7 @@ part of 'api_service.dart';
 
 class _ApiService implements ApiService {
   _ApiService(this._dio, {this.baseUrl}) {
-    baseUrl ??= 'http://6cf4-154-180-84-54.ngrok.io/api';
+    baseUrl ??= 'https://2b1f-41-41-227-249.ngrok.io/api';
   }
 
   final Dio _dio;
@@ -18,19 +18,19 @@ class _ApiService implements ApiService {
   String? baseUrl;
 
   @override
-  Future<LoginModel> login(body) async {
+  Future<LoginResponseModel> login(loginModel) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(body);
+    _data.addAll(loginModel.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<LoginModel>(
+        _setStreamType<LoginResponseModel>(
             Options(method: 'POST', headers: _headers, extra: _extra)
                 .compose(_dio.options, '/login',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = LoginModel.fromJson(_result.data!);
+    final value = LoginResponseModel.fromJson(_result.data!);
     return value;
   }
 

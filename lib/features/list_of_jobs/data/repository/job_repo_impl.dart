@@ -11,7 +11,7 @@ import '../model/job_model.dart';
 import '../services/api_service.dart';
 
 class JobDataRepositoryImpl implements JobDataRepository{
-   final ApiService apiService =ApiService(Dio(), baseUrl: 'https://0244-41-38-218-113.ngrok.io/api' );
+   final ApiService apiService =ApiService(Dio() );
   @override
   Future<Either<Failure, List <JobData>>> getJob() async{
     try {
