@@ -23,6 +23,7 @@ class LoginDataRepositoryImpl implements LoginDataRepository{
     try{
       final LoginResponseModel response= (await apiService.login(loginModel));
       print ('response fom repo $response');
+      token=  'Bearer '+ response.token;
        return Right(response.user);
 
     } catch(e){

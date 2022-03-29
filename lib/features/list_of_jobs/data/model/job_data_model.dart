@@ -14,7 +14,7 @@ class JobDataModel {
     return JobDataModel(
       jobName: json['JobName'] as String,
       description: json['Description'] as String,
-      publishedDate: json['Published Date'] as String ,
+      publishedDate: json['Published_Date'] as String ,
       id: json['id'] as int,
     );
   }

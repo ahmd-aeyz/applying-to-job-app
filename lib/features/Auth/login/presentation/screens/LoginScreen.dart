@@ -21,6 +21,8 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    emailController.text = "nahla@gmail.com";
+    passwordController.text = "123456";
     return BlocProvider(
         create: (BuildContext context) => getIt<LoginCubit>(),
         child: Builder(builder: (BuildContext context) {
@@ -68,6 +70,7 @@ class LoginScreen extends StatelessWidget {
                             height: 25,
                           ),
                           defaultFormField(
+                            initValue:"nahla@gmail.com",
                               controller: emailController,
                               keyboardType: TextInputType.text,
                               validate: (String? value) {
@@ -82,6 +85,7 @@ class LoginScreen extends StatelessWidget {
                             height: 15,
                           ),
                           defaultFormField(
+                            initValue: "123456",
                               controller: passwordController,
                               keyboardType: TextInputType.text,
                               validate: (String? value) {

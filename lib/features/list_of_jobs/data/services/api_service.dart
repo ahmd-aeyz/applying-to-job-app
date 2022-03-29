@@ -11,11 +11,19 @@ part 'api_service.g.dart';
 
 abstract class ApiService {
   factory ApiService (Dio dio, { String? baseUrl}){
+     dio.options = BaseOptions(
+
+       // headers: {"Accept":"application/json",
+       // "Authorization":"Bearer 13|XFvb11GWyTk6c9b4eAr5vHoryRgc9NdBdD95CyNS"}
+    );
 
     return _ApiService(dio, baseUrl: baseUrl);
   }
 
   @GET('/jobs')
-  Future<JobModel> getJobs();
+  Future<JobModel> getJobs({
+  @Header("Authorization") required String token,
+});
+
 
 }

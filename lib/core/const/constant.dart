@@ -1,1 +1,3 @@
-const String baseUrl ='https://2b1f-41-41-227-249.ngrok.io/api';
+const String baseUrl ='https://laravel-job-api.herokuapp.com/api';
+
+ String token ='';

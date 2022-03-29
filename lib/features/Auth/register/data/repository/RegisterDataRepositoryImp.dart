@@ -7,6 +7,7 @@ import 'package:mega_trust_project/features/Auth/register/data/model/register_mo
 import 'package:mega_trust_project/features/Auth/register/data/model/user_model.dart';
 import 'package:mega_trust_project/features/Auth/register/data/model/user_registeration_model.dart';
 import 'package:mega_trust_project/features/Auth/register/domain/entities/registeration_input_entity.dart';
+import '../../../../../core/const/constant.dart';
 import '../../domain/entities/user_entity.dart';
 import '../../domain/repository/RegisterDataRepository.dart';
 
@@ -21,6 +22,7 @@ class RegisterDataRepositoryImpl implements RegisterDataRepository{
           password: registerData.password, passwordConfirmation: registerData.passwordConfirmation);
       final RegisterResponseModel response= await apiService.register(registerInputModel);
       final UserModel result = response.user;
+      token=  'Bearer '+ response.token;
 
       print('response register is ${response.user.toJson()} ,token is : ${response.token}');
       return(  Right(result));
