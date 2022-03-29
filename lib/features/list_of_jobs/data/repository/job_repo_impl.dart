@@ -1,6 +1,7 @@
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:mega_trust_project/core/const/constant.dart';
 import 'package:mega_trust_project/core/error/failures.dart';
 import 'package:mega_trust_project/features/list_of_jobs/domain/entities/job_entities.dart';
 import 'package:mega_trust_project/features/list_of_jobs/domain/repository/job_rep.dart';
@@ -15,7 +16,7 @@ class JobDataRepositoryImpl implements JobDataRepository{
   @override
   Future<Either<Failure, List <JobData>>> getJob() async{
     try {
-      final  JobModel messageresult= await apiService.getJobs();
+      final  JobModel messageresult= await apiService.getJobs(token: token);
       print('message is '+ messageresult.toString());
       final List<JobDataModel> result = messageresult.jobData;
       print('result is: $result');

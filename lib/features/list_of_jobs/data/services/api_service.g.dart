@@ -10,7 +10,7 @@ part of 'api_service.dart';
 
 class _ApiService implements ApiService {
   _ApiService(this._dio, {this.baseUrl}) {
-    baseUrl ??= 'https://2b1f-41-41-227-249.ngrok.io/api';
+    baseUrl ??= 'https://laravel-job-api.herokuapp.com/api';
   }
 
   final Dio _dio;
@@ -18,10 +18,11 @@ class _ApiService implements ApiService {
   String? baseUrl;
 
   @override
-  Future<JobModel> getJobs() async {
+  Future<JobModel> getJobs({required token}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<JobModel>(
