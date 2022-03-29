@@ -15,7 +15,7 @@ abstract class ApiService{
     return _ApiService(dio, baseUrl:baseUrl);
   }
 
-  @POST ('/register')
+  @POST ('https://laravel-job-api.herokuapp.com/api/register')
   Future<RegisterResponseModel> register (@Body() RegisterInputModel registerInputModel);
 
 
