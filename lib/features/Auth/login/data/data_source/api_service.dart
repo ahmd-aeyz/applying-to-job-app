@@ -11,9 +11,9 @@ part 'api_service.g.dart';
 @injectable
 abstract class ApiService{
   @factoryMethod
-  factory ApiService (Dio dio, String baseUrl){
+  factory ApiService (Dio dio){
 
-    return _ApiService(dio, baseUrl:baseUrl);
+    return _ApiService(dio,);
   }
 
   @POST ('/login')

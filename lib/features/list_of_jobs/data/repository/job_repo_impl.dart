@@ -15,9 +15,7 @@ import '../services/api_service.dart';
 @Injectable(as: JobDataRepository)
 class JobDataRepositoryImpl implements JobDataRepository {
   final ApiService apiService ;
-
   JobDataRepositoryImpl(this.apiService);
-
 
   @override
   Future<Either<Failure, List <JobData>>> getJob() async {

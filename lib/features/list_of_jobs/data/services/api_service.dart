@@ -12,7 +12,7 @@ part 'api_service.g.dart';
 @injectable
 abstract class ApiService {
   @factoryMethod
-  factory ApiService (Dio dio, { String? baseUrl}){
+  factory ApiService (Dio dio){
      dio.options = BaseOptions(
 
        // headers: {"Accept":"application/json",
