@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mega_trust_project/features/list_of_jobs/domain/entities/job_entities.dart';
@@ -21,17 +20,39 @@ class JobListBuilder extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    job.title.toString(),
-                    style: const TextStyle(
-                      fontSize: 10,
-                      fontWeight: FontWeight.bold,
+
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      job.title.toString(),
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    width: 250,
-                  ),
+                    Text(
+                      job.jobDescription.toString(),
+                      style: const TextStyle(
+                        fontSize: 16,
+
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      job.publishDate.toString(),
+                      style: const TextStyle(
+                        fontSize: 10,
+
+                      ),
+                    ),
+                  ],
+                ) ,
+
                   BlocConsumer<ApplyCubit, ApplyState>(
                     listener: (context, state) {},
                     builder: (context, state) {
@@ -41,7 +62,7 @@ class JobListBuilder extends StatelessWidget {
 
                            initial: (_) {
                              if( job.isApplied ){
-                              return Text('Applied');
+                              return const Text('Applied');
                              }else{
                                return TextButton(
                                    onPressed: () async {
@@ -69,7 +90,7 @@ class JobListBuilder extends StatelessWidget {
                                job.isApplied=true;
                              }
                              if( job.isApplied ){
-                               return Text('Applied');
+                               return const Text('Applied');
                              }else{
                                return TextButton(
                                    onPressed: () async {
@@ -89,12 +110,6 @@ class JobListBuilder extends StatelessWidget {
                        } else{
                          return const Text('Applied');
                        }
-                       return TextButton(
-                           onPressed: () async {
-                             await BlocProvider.of<ApplyCubit>(context)
-                                 .applyJob(jobId: job.id);
-                           },
-                           child: const Text('Apply Now'));
 
                     },
                   ),

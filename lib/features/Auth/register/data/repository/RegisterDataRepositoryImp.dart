@@ -26,7 +26,7 @@ class RegisterDataRepositoryImpl implements RegisterDataRepository{
       userId= response.user.id;
 
       print('response register is ${response.user.toJson()} ,token is : ${response.token}');
-      return(  Right(result));
+      return(right(result));
     } catch (e) {
       print('error $e');
       return left(ServerFailure(e.toString()));

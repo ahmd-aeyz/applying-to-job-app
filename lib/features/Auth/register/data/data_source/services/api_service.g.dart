@@ -27,7 +27,8 @@ class _ApiService implements ApiService {
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<RegisterResponseModel>(
             Options(method: 'POST', headers: _headers, extra: _extra)
-                .compose(_dio.options, '/register',
+                .compose(_dio.options,
+                    'https://laravel-job-api.herokuapp.com/api/register',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = RegisterResponseModel.fromJson(_result.data!);
