@@ -2,6 +2,7 @@
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 import 'package:mega_trust_project/core/const/constant.dart';
 import 'package:mega_trust_project/core/error/failures.dart';
 import 'package:mega_trust_project/features/Auth/login/data/data_source/api_service.dart';
@@ -14,9 +15,13 @@ import 'package:mega_trust_project/features/Auth/register/domain/entities/user_e
 
 import '../../../register/data/model/register_model.dart';
 
+
+@Injectable(as: LoginDataRepository)
 class LoginDataRepositoryImpl implements LoginDataRepository{
 
-  final ApiService apiService = ApiService(Dio() , baseUrl );
+  final ApiService apiService ;
+
+  LoginDataRepositoryImpl(this.apiService);
   @override
   Future<Either<Failure, UserEntities>> login({required String email, required String password}) async {
     final LoginModel loginModel = LoginModel(email: email, password: password);

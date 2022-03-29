@@ -1,6 +1,7 @@
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 import 'package:mega_trust_project/core/const/constant.dart';
 import 'package:mega_trust_project/core/error/failures.dart';
 import 'package:mega_trust_project/features/list_of_jobs/domain/entities/job_entities.dart';
@@ -11,8 +12,12 @@ import '../model/job_data_model.dart';
 import '../model/job_model.dart';
 import '../services/api_service.dart';
 
+@Injectable(as: JobDataRepository)
 class JobDataRepositoryImpl implements JobDataRepository {
-  final ApiService apiService = ApiService(Dio());
+  final ApiService apiService ;
+
+  JobDataRepositoryImpl(this.apiService);
+
 
   @override
   Future<Either<Failure, List <JobData>>> getJob() async {

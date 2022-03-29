@@ -1,11 +1,13 @@
 
 import 'package:dartz/dartz.dart';
+import 'package:injectable/injectable.dart';
 import 'package:mega_trust_project/core/error/failures.dart';
 import 'package:mega_trust_project/core/usecase/usecase.dart';
 import 'package:mega_trust_project/features/Auth/register/domain/entities/registeration_input_entity.dart';
 import 'package:mega_trust_project/features/Auth/register/domain/entities/user_entity.dart';
 import 'package:mega_trust_project/features/Auth/register/domain/repository/RegisterDataRepository.dart';
 
+@injectable
 class Register extends UseCase<UserEntities , RegisterationInputEntities>{
   final RegisterDataRepository registerRepository;
 

@@ -1,10 +1,12 @@
 import 'package:dartz/dartz.dart';
+import 'package:injectable/injectable.dart';
 import 'package:mega_trust_project/core/error/failures.dart';
 import 'package:mega_trust_project/core/usecase/usecase.dart';
 import 'package:mega_trust_project/features/Auth/login/domain/entities/login_user_entity.dart';
 import 'package:mega_trust_project/features/Auth/login/domain/repository/LoginDataRepository.dart';
 import 'package:mega_trust_project/features/Auth/register/domain/entities/user_entity.dart';
 
+@injectable
 class Login extends UseCase<UserEntities, LoginDataEntity> {
   final LoginDataRepository loginDataRepository;
 

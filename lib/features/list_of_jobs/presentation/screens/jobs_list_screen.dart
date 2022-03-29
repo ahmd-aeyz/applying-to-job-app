@@ -4,8 +4,7 @@ import 'package:mega_trust_project/features/list_of_jobs/domain/entities/job_ent
 import 'package:mega_trust_project/features/list_of_jobs/presentation/bloc/job_cubit.dart';
 import 'package:mega_trust_project/features/list_of_jobs/presentation/bloc/job_states.dart';
 import 'package:mega_trust_project/features/list_of_jobs/presentation/widget/widgets.dart';
-
-import '../../../../locator.dart';
+import '../../../../di/injectable.dart';
 import '../bloc/apply_bloc/apply_cubit.dart';
 
 
@@ -86,8 +85,6 @@ class BuildBlocWidget extends StatelessWidget {
               );
             }
           }
-
-
 
 
       ),

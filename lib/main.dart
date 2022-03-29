@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:mega_trust_project/features/Auth/register/presentation/screens/register.dart';
 import 'package:mega_trust_project/locator.dart';
 
+import 'di/injectable.dart';
 import 'features/Auth/login/presentation/screens/LoginScreen.dart';
 
 void main() async {
-  await initLocator();
+  // await initLocator();
+  WidgetsFlutterBinding.ensureInitialized();
+  await configureDependencies();
   runApp( const MyApp());
 }
 
