@@ -23,6 +23,7 @@ class RegisterDataRepositoryImpl implements RegisterDataRepository{
       final RegisterResponseModel response= await apiService.register(registerInputModel);
       final UserModel result = response.user;
       token=  'Bearer '+ response.token;
+      userId= response.user.id;
 
       print('response register is ${response.user.toJson()} ,token is : ${response.token}');
       return(  Right(result));

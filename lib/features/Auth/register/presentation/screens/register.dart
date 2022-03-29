@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mega_trust_project/core/assets/icons.dart';
 import 'package:mega_trust_project/features/Auth/login/presentation/widgets/widgets.dart';
 import 'package:mega_trust_project/features/Auth/register/presentation/bloc/register_cubit.dart';
-import 'package:mega_trust_project/features/list_of_jobs/presentation/screens/job_screen.dart';
+import 'package:mega_trust_project/features/list_of_jobs/presentation/screens/jobs_list_screen.dart';
 import 'package:mega_trust_project/locator.dart';
 
 import '../../../../../core/assets/icons.dart';
@@ -31,7 +31,7 @@ class RegisterScreen extends StatelessWidget {
                   loading: (_) {},
                   success: (_) {
                     Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => JobScreen()));
+                        MaterialPageRoute(builder: (context) => JobsListScreen()));
                   },
                   error: (error) {
                     ScaffoldMessenger.of(context).showSnackBar(

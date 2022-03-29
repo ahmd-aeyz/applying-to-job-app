@@ -25,5 +25,12 @@ abstract class ApiService {
   @Header("Authorization") required String token,
 });
 
+ @POST ('/appliedJob')
+  Future<String> applyJob({
+   @Query('user_id') required int userId,
+   @Query('job_id') required int jobId,
+   @Header("Authorization") required String token,
+
+ });
 
 }

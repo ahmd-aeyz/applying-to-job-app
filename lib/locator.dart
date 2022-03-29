@@ -7,6 +7,7 @@ import 'package:mega_trust_project/features/Auth/register/presentation/bloc/regi
 
 import 'package:mega_trust_project/features/list_of_jobs/data/repository/job_repo_impl.dart';
 import 'package:mega_trust_project/features/list_of_jobs/domain/repository/job_rep.dart';
+import 'package:mega_trust_project/features/list_of_jobs/domain/usecases/apply_usecase.dart';
 import 'package:mega_trust_project/features/list_of_jobs/domain/usecases/job_usecase.dart';
 import 'package:mega_trust_project/features/list_of_jobs/presentation/bloc/job_cubit.dart';
 
@@ -15,6 +16,7 @@ import 'features/Auth/login/domain/repository/LoginDataRepository.dart';
 import 'features/Auth/login/domain/usecases/login_usecase.dart';
 import 'features/Auth/login/presentation/bloc/login_cubit.dart';
 import 'features/list_of_jobs/domain/usecases/job_usecase.dart';
+import 'features/list_of_jobs/presentation/bloc/apply_bloc/apply_cubit.dart';
 
 /// Global GetIt instance
 GetIt getIt = GetIt.instance;
@@ -29,12 +31,14 @@ Future<void> initLocator()async{
 
   getIt.registerLazySingleton<LoginDataRepository>(() => LoginDataRepositoryImpl());
 
+
   ///UserCases
   getIt.registerLazySingleton(() => JobsUsercase(
     getIt.get<JobDataRepository>()
   ));
   getIt.registerLazySingleton(() => Register(getIt.get<RegisterDataRepository>()));
   getIt.registerLazySingleton(() => Login(getIt.get<LoginDataRepository>()));
+  getIt.registerLazySingleton(() => ApplyJob(getIt.get<JobDataRepository>()));
 
   ///Bloc
 
@@ -44,6 +48,7 @@ Future<void> initLocator()async{
 
   getIt.registerFactory(() => RegisterCubit(getIt()));
   getIt.registerFactory(() => LoginCubit(getIt()));
+  getIt.registerFactory(() => ApplyCubit(getIt()));
 
   
   

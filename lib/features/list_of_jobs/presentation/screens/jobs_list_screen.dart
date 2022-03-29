@@ -6,12 +6,13 @@ import 'package:mega_trust_project/features/list_of_jobs/presentation/bloc/job_s
 import 'package:mega_trust_project/features/list_of_jobs/presentation/widget/widgets.dart';
 
 import '../../../../locator.dart';
+import '../bloc/apply_bloc/apply_cubit.dart';
 
 
-class JobScreen extends StatelessWidget {
+class JobsListScreen extends StatelessWidget {
 
 
-  const JobScreen({Key? key}) : super(key: key);
+  const JobsListScreen({Key? key}) : super(key: key);
 
 
 
@@ -21,9 +22,9 @@ class JobScreen extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.deepOrange,
-          title: Center(child: Text("Jobs")),
+          title: const Center(child: Text("Jobs")),
         ),
-        body:BuildBlocWidget());
+        body:const BuildBlocWidget());
   }
 
 
@@ -39,7 +40,7 @@ class BuildListView extends StatelessWidget {
       return ListView.builder(
           itemCount:allJobs.length,
           itemBuilder: (BuildContext context, index) {
-            return JobListBuilder(Job:allJobs[index] );
+            return JobListBuilder(job:allJobs[index] );
           });
     }
   }
@@ -68,7 +69,10 @@ class BuildBlocWidget extends StatelessWidget {
               final List<JobData> allJobs= (state).data;
               print(allJobs);
 
-              return BuildListView(allJobs: allJobs);
+              return BlocProvider<ApplyCubit>(create: ( context)=> getIt<ApplyCubit>(),
+                child:BuildListView(allJobs: allJobs) ,
+              );
+
               //return buildLoadedListWidgets();
             }
             else{
