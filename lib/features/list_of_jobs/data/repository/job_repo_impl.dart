@@ -11,31 +11,40 @@ import '../model/job_data_model.dart';
 import '../model/job_model.dart';
 import '../services/api_service.dart';
 
-class JobDataRepositoryImpl implements JobDataRepository{
-   final ApiService apiService =ApiService(Dio() );
+class JobDataRepositoryImpl implements JobDataRepository {
+  final ApiService apiService = ApiService(Dio());
+
   @override
-  Future<Either<Failure, List <JobData>>> getJob() async{
+  Future<Either<Failure, List <JobData>>> getJob() async {
     try {
-      final  JobModel messageresult= await apiService.getJobs(token: token);
-      print('message is '+ messageresult.toString());
+      final JobModel messageresult = await apiService.getJobs(token: token);
+      print('message is ' + messageresult.toString());
       final List<JobDataModel> result = messageresult.jobData;
       print('result is: $result');
-      final  List<JobData> jobs= result.map((jobDataModel) => jobDataModel.mapper()).toList();
+      final List<JobData> jobs = result.map((jobDataModel) =>
+          jobDataModel.mapper()).toList();
       print('jobs is ${jobs.length}');
-      return Right( jobs);
+      return Right(jobs);
     } catch (e) {
       print('error $e');
-      return left(CacheFailure(e.toString()));
+      return left(ServerFailure(e.toString()));
     }
-
   }
 
-  @override
-  // TODO: implement props
-  List<Object?> get props => throw UnimplementedError();
 
   @override
-  // TODO: implement stringify
-  bool? get stringify => throw UnimplementedError();
+  Future<Either<Failure, String>> applyJob({required int jobId}) async {
+    try {
+      final String response = await apiService.applyJob(
+          userId: userId, jobId: jobId, token: token);
 
+      return right(response);
+    } catch (e) {
+      print('error $e');
+      return left(ServerFailure(e.toString()));
+    }
+  }
 }
+
+
+

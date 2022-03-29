@@ -5,6 +5,8 @@ import 'package:mega_trust_project/core/error/failures.dart';
 
 import '../entities/job_entities.dart';
 
-abstract class JobDataRepository extends Equatable{
+abstract class JobDataRepository {
   Future<Either<Failure,List<JobData>>> getJob();
+
+  Future<Either<Failure,String>> applyJob({  required int jobId }) ;
   }
