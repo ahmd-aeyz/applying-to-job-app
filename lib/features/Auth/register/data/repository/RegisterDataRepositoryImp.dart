@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 
 import 'package:mega_trust_project/core/error/failures.dart';
 import 'package:mega_trust_project/features/Auth/register/data/data_source/services/api_service.dart';
@@ -11,9 +12,12 @@ import '../../../../../core/const/constant.dart';
 import '../../domain/entities/user_entity.dart';
 import '../../domain/repository/RegisterDataRepository.dart';
 
+@Injectable(as: RegisterDataRepository)
 class RegisterDataRepositoryImpl implements RegisterDataRepository{
 
-  final ApiService apiService =ApiService(Dio(),  );
+  final ApiService apiService ;
+
+  RegisterDataRepositoryImpl(this.apiService);
 
   @override
   Future<Either<Failure, UserEntities>> register(RegisterationInputEntities registerData) async{

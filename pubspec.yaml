@@ -52,6 +52,10 @@ dependencies:
 
   conditional_builder_null_safety: ^0.0.6
 
+  injectable: ^1.5.3
+
+
+
 
 
 
@@ -63,6 +67,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   retrofit_generator: ^4.0.1
+  injectable_generator: ^1.5.3
   build_runner:  ^2.1.8
   json_serializable: ^6.1.5
   freezed: ^1.1.1

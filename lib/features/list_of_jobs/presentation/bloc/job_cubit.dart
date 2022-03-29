@@ -1,8 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:mega_trust_project/features/list_of_jobs/domain/usecases/job_usecase.dart';
 import 'package:mega_trust_project/features/list_of_jobs/presentation/bloc/job_states.dart';
 
-
+@injectable
 class JobCubit extends Cubit<JobStates> {
   final JobsUsercase jobsUsecase;
 

@@ -7,6 +7,7 @@ import 'package:mega_trust_project/features/list_of_jobs/presentation/screens/jo
 import 'package:mega_trust_project/locator.dart';
 
 import '../../../../../core/assets/icons.dart';
+import '../../../../../di/injectable.dart';
 import '../../../login/presentation/screens/LoginScreen.dart';
 import '../bloc/register_states.dart';
 
