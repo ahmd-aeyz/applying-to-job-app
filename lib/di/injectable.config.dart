@@ -47,12 +47,9 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   await gh.factoryAsync<_i4.SharedPreferences>(
       () => sharedPrefrenceModule.prefs,
       preResolve: true);
-  gh.factory<_i5.ApiService>(
-      () => _i5.ApiService(get<_i3.Dio>(), get<String>()));
-  gh.factory<_i6.ApiService>(
-      () => _i6.ApiService(get<_i3.Dio>(), baseUrl: get<String>()));
-  gh.factory<_i7.ApiService>(
-      () => _i7.ApiService(get<_i3.Dio>(), baseUrl: get<String>()));
+  gh.factory<_i5.ApiService>(() => _i5.ApiService(get<_i3.Dio>()));
+  gh.factory<_i6.ApiService>(() => _i6.ApiService(get<_i3.Dio>()));
+  gh.factory<_i7.ApiService>(() => _i7.ApiService(get<_i3.Dio>()));
   gh.factory<_i8.JobDataRepository>(
       () => _i9.JobDataRepositoryImpl(get<_i7.ApiService>()));
   gh.factory<_i10.JobsUsercase>(
