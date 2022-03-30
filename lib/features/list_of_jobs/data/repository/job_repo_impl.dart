@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mega_trust_project/core/const/constant.dart';
 import 'package:mega_trust_project/core/error/failures.dart';
+import 'package:mega_trust_project/features/Auth/domain/local_data_source/local_data_source.dart';
 import 'package:mega_trust_project/features/list_of_jobs/domain/entities/job_entities.dart';
 import 'package:mega_trust_project/features/list_of_jobs/domain/repository/job_rep.dart';
 
@@ -15,12 +16,15 @@ import '../services/api_service.dart';
 @Injectable(as: JobDataRepository)
 class JobDataRepositoryImpl implements JobDataRepository {
   final ApiService apiService ;
-  JobDataRepositoryImpl(this.apiService);
+  JobDataRepositoryImpl(this.apiService, this._localDataSource);
+  final LocalDataSource _localDataSource;
 
   @override
   Future<Either<Failure, List <JobData>>> getJob() async {
+
     try {
-      final JobModel messageresult = await apiService.getJobs(token: token);
+      final String? token = await _localDataSource.getToken();
+      final JobModel messageresult = await apiService.getJobs(token: token!);
       print('message is ' + messageresult.toString());
       final List<JobDataModel> result = messageresult.jobData;
       print('result is: $result');
@@ -38,8 +42,11 @@ class JobDataRepositoryImpl implements JobDataRepository {
   @override
   Future<Either<Failure, String>> applyJob({required int jobId}) async {
     try {
+
+      final String? token = await _localDataSource.getToken();
+      final int? userId = await _localDataSource.getUserId();
       final String response = await apiService.applyJob(
-          userId: userId, jobId: jobId, token: token);
+          userId: userId!, jobId: jobId, token:token! );
 
       return right(response);
     } catch (e) {

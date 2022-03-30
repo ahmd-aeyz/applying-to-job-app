@@ -8,15 +8,15 @@ class ApplyCubit extends Cubit<ApplyState> {
   final ApplyJob _applyJob;
   int jobId =-1;
 
-  ApplyCubit(this._applyJob) : super(ApplyState.initial());
+  ApplyCubit(this._applyJob) : super(const ApplyState.initial());
 
   Future<void> applyJob({required int jobId}) async {
     this.jobId= jobId;
-    emit(ApplyState.loading());
+    emit(const ApplyState.loading());
     final result = await _applyJob(jobId);
     result.fold(
-      (error) => emit(ApplyState.error()),
-      (success) => emit(ApplyState.success()),
+      (error) => emit(const ApplyState.error()),
+      (success) => emit(const ApplyState.success()),
     );
   }
 }
