@@ -4,5 +4,5 @@ import 'package:injectable/injectable.dart';
 @module
 abstract class DioModule {
 
-  Dio  get prefs => Dio();
+  Dio  get getDio => Dio();
 }

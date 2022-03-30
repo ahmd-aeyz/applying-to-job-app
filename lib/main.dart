@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:mega_trust_project/features/Auth/register/presentation/screens/register.dart';
-import 'package:mega_trust_project/locator.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mega_trust_project/features/Auth/presentation/bloc/auth/auth_cubit.dart';
+import 'package:mega_trust_project/features/Auth/presentation/screens/auth.dart';
 import 'di/injectable.dart';
-import 'features/Auth/login/presentation/screens/LoginScreen.dart';
+import 'features/list_of_jobs/presentation/bloc/job_cubit.dart';
 
 void main() async {
-  // await initLocator();
+
   WidgetsFlutterBinding.ensureInitialized();
   await configureDependencies();
-  runApp( const MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -18,13 +18,23 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-
-        primarySwatch: Colors.deepOrange,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (BuildContext context) => getIt<AuthCubit>(),
+        ),
+        BlocProvider(
+        create: (BuildContext context) => getIt<JobCubit>(),
+        )
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.deepOrange,
+        ),
+        home: const AuthScreen(),
       ),
-      home: LoginScreen(),
     );
   }
 }
